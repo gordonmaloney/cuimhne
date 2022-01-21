@@ -4,24 +4,44 @@ import Grid from "@mui/material/Grid";
 import Snackbar from "@mui/material/Snackbar";
 import { Button, SnackbarContent } from "@mui/material";
 
+//select from levels
+let levels = [
+    "Intro",
+    "Food and Drink",
+    "Phrases",
+    "Feelings",
+    "About Me",
+    "Clothing",
+    "Pets",
+    "Weather",
+    "Phrases 2",
+    "Rain etc.",
+    "Numbers",
+    "Family",
+    "Numbers 2",
+    "Food 2",
+    "Colors",
+    "Home"
+    ]
+
 //make random array of 6 words from WORDS list
 let RandomArray = [];
 
-for (let i = 0; i < 6; i++) {
+for (let i = 0; RandomArray.length < 6; i++) {
   let RanNum = Math.floor(Math.random() * WORDS.length);
-  !RandomArray.includes(WORDS[RanNum]) &&
+  !RandomArray.includes(WORDS[RanNum]) && levels.includes(WORDS[RanNum].level) &&
     WORDS[RanNum].l1 !== WORDS[RanNum].l2 &&
     RandomArray.push(WORDS[RanNum]);
-  console.log(RandomArray);
 }
 
 let shuffledWords = [];
 
 RandomArray.map((word) => {
-  let newWord = { Q: word.l1, A: word.l2 };
-  let newWord2 = { Q: word.l2, A: word.l1 };
+  let newWord = { Q: word.l1, A: word.l2, front: "L1" };
+  let newWord2 = { Q: word.l2, A: word.l1, front: "L2" };
   shuffledWords.push(newWord);
   shuffledWords.push(newWord2);
+  console.log(shuffledWords)
 });
 
 function shuffleArray(array) {
@@ -122,8 +142,7 @@ export const Memory = () => {
 
   return (
     <div className="memory-game-wrapper">
-
-{win && (
+      {win && (
         <center>
           <h1>Bhuannaich thu! Meal do naidheachd!</h1>
           <Button
@@ -139,18 +158,21 @@ export const Memory = () => {
             onClick={() => window.location.reload()}
           >
             Feuch a-rithist
-          </Button><br /><br /><br />
+          </Button>
+          <br />
+          <br />
+          <br />
         </center>
       )}
 
-
       <div
-        style={{ perspective: "8000px", pointerEvents: !clickable && "none" }}
+        className="CardsContainer"
+        style={{ pointerEvents: !clickable && "none" }}
       >
         <Grid container spacing={1}>
           {shuffledWords.map((word) => {
             return (
-              <Grid item xs={6} sm={3} md={2}>
+              <Grid item xs={4} sm={3} md={2}>
                 <div
                   className={
                     show.includes(word.Q) || correct.includes(word.Q)
@@ -159,12 +181,10 @@ export const Memory = () => {
                   }
                   id={word.Q}
                   style={{
-                    borderRadius: "5px",
                     display: "inline-block",
                     width: "100%",
                     height: "140px",
                     maxHeight: "20vw",
-                    backgroundColor: "rgb(185, 204, 218)",
                     margin: "5px",
                   }}
                   onClick={() =>
@@ -173,40 +193,26 @@ export const Memory = () => {
                     selectCard(word.Q)
                   }
                 >
-                  <div
-                    className="back-face"
-                    style={{
-                      position: "absolute",
-                      height: "100%",
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <center>
-                      <span style={{ userSelect: "none" }}></span>
-                    </center>
-                  </div>
+                  <div className="card-face back-face" />
 
                   <div
-                    className="front-face"
+                    className="card-face front-face"
                     style={{
-                      position: "absolute",
-                      height: "100%",
-                      display: "flex",
-                      width: "100%",
                       borderRadius: "5px",
                       border: "5px solid rgb(185, 204, 218)",
                       boxSizing: "border-box",
-                      backgroundColor: correct.includes(word.Q)
+                      backgroundColor: 
+                      
+                      correct.includes(word.Q)
                         ? "white"
-                        : "rgb(185, 204, 218)",
-                      justifyContent: "center",
-                      alignItems: "center",
+                        : word.front == "L1" ?
+                          "rgba(208, 231, 247, 0.76)"
+                        : "rgb(185, 204, 218)"
                     }}
                   >
+                    <center>
                     <h5 style={{ userSelect: "none" }}>{word.Q}</h5>
+                    </center>
                   </div>
                 </div>
               </Grid>
@@ -227,7 +233,6 @@ export const Memory = () => {
           }
         />
       </Snackbar>
-
     </div>
   );
 };

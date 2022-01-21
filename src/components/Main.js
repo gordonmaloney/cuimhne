@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import { Memory } from "./Memory";
 import { Header } from "./Header";
+import { Footer } from "./Footer";
 
 export const Main = () => {
   return (
@@ -14,6 +15,7 @@ export const Main = () => {
           </Route>
         </Switch>
       </BrowserRouter>
+      <Footer />
     </div>
   );
 };

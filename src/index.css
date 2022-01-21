@@ -26,11 +26,20 @@ td {
 
 .header {
   background-color: #b9ccda;
-  height: 100px;
+  height: 90px;
   text-align: center;
   position: absolute;
   width: 100%;
   top: 0;
+}
+
+.footer {
+  position: fixed;
+  background-color: #b9ccda;
+  height: 25px;
+  text-align: right;
+  width: 100%;
+  bottom: 0;
 }
 
 .menufab {
@@ -68,27 +77,58 @@ h5 {
   }
 }
 
+.CardsContainer {
+  perspective: 8000px;
+  -webkit-perspective: 8000px,
+}
+
 .card {
+  display: inline-block;
+  width: 100%;
+  height: 140px;
+  max-height: 20vw;
+  margin: 5px;
+
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+
   transition: transform 0.6s;
+  -webkit-transition: 0.6s;
 }
 
 .flip {
-  transform: rotateY(180deg);
+  transform: rotate3d(0, 1, 0, 180deg);
+  -webkit-transform: rotate3d(0, 1, 0, 180deg);
+}
+
+.card-face {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: rgb(185, 204, 218);
 }
 
 .back-face {
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .front-face {
-  transform: rotateY(180deg);
+  transform: rotate3d(0, 1, 0, 180deg);
+  -webkit-transform: rotate3d(0, 1, 0, 180deg);
+
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .memory-game-wrapper {
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 90px;
   width: 60%;
   min-width: 300px;
   max-width: 700px;
@@ -98,4 +138,15 @@ h5 {
 .css-1eqdgzv-MuiPaper-root-MuiSnackbarContent-root {
   min-width: 180px !important;
   max-width: 180px !important;
+}
+
+.header-howto {
+  position: absolute;
+  right: 20px;
+  color: rgba(208, 231, 247, 0.76)
+}
+
+.modalBody {
+  padding: 10px;
+  text-align: center;
 }
