@@ -35,9 +35,14 @@ export const levelSlice = createSlice({
         return state
       }
     },
+
+    replaceLevels: (state, action) => {
+      state = action.payload;
+      return state
+    }
   },
 });
 
-export const { addLevel, removeLevel } = levelSlice.actions;
+export const { addLevel, removeLevel, replaceLevels } = levelSlice.actions;
 
 export default levelSlice.reducer;

@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addLevel, removeLevel } from "../Redux/levelSlice";
+import { addLevel, removeLevel, replaceLevels } from "../Redux/levelSlice";
 import Slider from "@mui/material/Slider";
 import { Box } from "@mui/system";
+
+import { LEVELS } from "../components/LEVELS";
 
 export const ChangeLevels = () => {
   const dispatch = useDispatch();
 
-  const levels = useSelector((state) => state.levels);
+  //const levels = useSelector((state) => state.levels);
+  const levels = LEVELS();
 
   const [newLevel, setNewLevel] = useState("Home");
 
@@ -28,6 +31,12 @@ export const ChangeLevels = () => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+
+    dispatch(
+      replaceLevels(
+        levels.slice(levels.length - value[1], levels.length - value[0] + 1)
+      )
+    );
   };
 
   let marks = [];
@@ -38,6 +47,7 @@ export const ChangeLevels = () => {
   };
   mapMarks();
 
+
   return (
     <div>
       <br />
@@ -45,31 +55,20 @@ export const ChangeLevels = () => {
       <br />
       <br />
       <br />
-      <input onChange={(e) => setNewLevel(e.target.value)} />
-      <br />
-      <button onClick={() => handleAdd(newLevel)}>add {newLevel}</button>
-
-      <Box sx={{ height: 300, marginY: 2 }}>
-        <Slider
-          value={value}
-          orientation="vertical"
-          onChange={handleChange}
-          getAriaValueText={valuetext}
-          disableSwap
-          min={1}
-          max={levels.length}
-          marks={marks}
-        />
-      </Box>
-      {console.log(levels.length)}
 
       <div style={{ position: "fixed", display: "block" }}>
-        {levels?.map((level) => (
-          <>
-            {level} <button onClick={() => handleRemove(level)}>remove</button>
-            <br />
-          </>
-        ))}
+        <Box sx={{ height: `${levels.length * 25}px`, marginY: 2 }}>
+          <Slider
+            value={value}
+            orientation="vertical"
+            onChange={handleChange}
+            getAriaValueText={valuetext}
+            disableSwap
+            min={1}
+            max={levels.length}
+            marks={marks}
+          />
+        </Box>
       </div>
     </div>
   );
