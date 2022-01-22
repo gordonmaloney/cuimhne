@@ -27,7 +27,7 @@ export const ChangeLevels = () => {
   function valuetext(value) {
     return `${value}°C`;
   }
-  const [value, setValue] = React.useState([levelLength - 2, levelLength]);
+  const [value, setValue] = React.useState([1, levelLength]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -69,6 +69,7 @@ export const ChangeLevels = () => {
             '& input[type="range"]': {
               WebkitAppearance: "slider-vertical",
             },
+            color: "#3b122e",
           }}
           onKeyDown={preventHorizontalKeyboardNavigation}
         />
