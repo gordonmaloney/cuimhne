@@ -9,7 +9,6 @@ export const Main = () => {
   return (
     <div>
       <Header />
-      <ChangeLevels />
       <BrowserRouter>
         <Switch>
           <Route exact path="/">

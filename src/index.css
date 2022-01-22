@@ -59,7 +59,9 @@ td {
 }
 
 h1,
+h2,
 h3,
+h4,
 h5 {
   color: #261420;
 }
@@ -75,6 +77,10 @@ h5 {
     margin-right: -50px;
     margin-left: -50px;
   }
+  h1, .menufab, .header-howto {
+    transform: scale(0.7);
+  }
+
 }
 
 .CardsContainer {

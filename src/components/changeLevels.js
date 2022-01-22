@@ -47,29 +47,32 @@ export const ChangeLevels = () => {
   };
   mapMarks();
 
+  function preventHorizontalKeyboardNavigation(event) {
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+    }
+  }
 
   return (
     <div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
-      <div style={{ position: "fixed", display: "block" }}>
-        <Box sx={{ height: `${levels.length * 25}px`, marginY: 2 }}>
-          <Slider
-            value={value}
-            orientation="vertical"
-            onChange={handleChange}
-            getAriaValueText={valuetext}
-            disableSwap
-            min={1}
-            max={levels.length}
-            marks={marks}
-          />
-        </Box>
-      </div>
+      <Box sx={{ height: `${levels.length * 25}px`, marginY: 2 }}>
+        <Slider
+          value={value}
+          orientation="vertical"
+          onChange={handleChange}
+          getAriaValueText={valuetext}
+          disableSwap
+          min={1}
+          max={levels.length}
+          marks={marks}
+          sx={{
+            '& input[type="range"]': {
+              WebkitAppearance: "slider-vertical",
+            },
+          }}
+          onKeyDown={preventHorizontalKeyboardNavigation}
+        />
+      </Box>
     </div>
   );
 };
