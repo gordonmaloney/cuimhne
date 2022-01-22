@@ -6,8 +6,7 @@ export const levelSlice = createSlice({
     "Intro",
     "Food and Drink",
     "Phrases",
-    "Feelings"
-    /*
+    "Feelings",
     "About Me",
     "Clothing",
     "Pets",
@@ -20,7 +19,6 @@ export const levelSlice = createSlice({
     "Food 2",
     "Colors",
     "Home",
-    */
   ],
 
   reducers: {
