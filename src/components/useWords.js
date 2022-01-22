@@ -11,7 +11,7 @@ export const useWords = () => {
   //make random array of 6 words from WORDS list
   let RandomArray = [];
 
-  for (let i = 0; RandomArray.length < 6; i++) {
+  for (let i = 0; RandomArray.length < 1; i++) {
     let RanNum = Math.floor(Math.random() * WORDS.length);
     !RandomArray.includes(WORDS[RanNum]) &&
       levels.includes(WORDS[RanNum].level) &&

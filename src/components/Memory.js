@@ -2,19 +2,43 @@ import React, { useState, useMemo } from "react";
 import Grid from "@mui/material/Grid";
 import Snackbar from "@mui/material/Snackbar";
 import { Button, SnackbarContent } from "@mui/material";
-import {useWords} from './useWords'
-
+import { useWords } from "./useWords";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 import { useSelector } from "react-redux";
+import CloseIcon from "@mui/icons-material/Close";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  maxWidth: "90%",
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  borderRadius: "8px",
+  border: "2px solid darkgrey",
+  height: "auto",
+  minHeight: "200px",
+  zIndex: 0,
+  padding: "0px",
+  margin: "0px",
+  paddingBottom: "20px",
+};
 
 export const Memory = () => {
+  const levels = useSelector((state) => state.levels);
+  console.log("levels, ", levels);
 
-  const levels = useSelector(state => state.levels)
-  console.log("levels, ", levels)
+  const [refresh, setRefresh] = useState(0);
 
   //import array from useWords
   const ImportedWords = useWords();
-  const ImportedArray = useMemo(() => ImportedWords, [ImportedWords.length, levels]);
-
+  const ImportedArray = useMemo(
+    () => ImportedWords,
+    [ImportedWords.length, levels, refresh]
+  );
 
   const [selectL1, setSelectL1] = useState("");
   const [selectL2, setSelectL2] = useState("");
@@ -66,6 +90,7 @@ export const Memory = () => {
       if (correct.length == ImportedArray.length) {
         //handle win
         setWin(true);
+        setCloseModal(true);
         console.log("You win!");
       }
     }, 50);
@@ -93,31 +118,23 @@ export const Memory = () => {
     setOpen(false);
   };
 
+  const reset = () => {
+    setRefresh(refresh + 1);
+    setWin(false);
+    setCorrect([]);
+  };
+
+  //modal stuff
+  const [closeModal, setCloseModal] = useState(false);
+  const handleClick = () => {
+    handleCloseModal();
+  };
+  const handleCloseModal = () => {
+    setCloseModal(false);
+  };
+
   return (
     <div className="memory-game-wrapper">
-      {win && (
-        <center>
-          <h1>Bhuannaich thu! Meal do naidheachd!</h1>
-          <Button
-            size="large"
-            variant="contained"
-            sx={{
-              textTransform: "none",
-              backgroundColor: "#b9ccda",
-              "&:hover": {
-                backgroundColor: "#8699a7",
-              },
-            }}
-            onClick={() => window.location.reload()}
-          >
-            Feuch a-rithist
-          </Button>
-          <br />
-          <br />
-          <br />
-        </center>
-      )}
-
       <div
         className="CardsContainer"
         style={{ pointerEvents: !clickable && "none" }}
@@ -154,17 +171,15 @@ export const Memory = () => {
                       borderRadius: "5px",
                       border: "5px solid rgb(185, 204, 218)",
                       boxSizing: "border-box",
-                      backgroundColor: 
-                      
-                      correct.includes(word.Q)
+                      backgroundColor: correct.includes(word.Q)
                         ? "white"
-                        : word.front == "L1" ?
-                          "rgba(208, 231, 247, 0.76)"
-                        : "rgb(185, 204, 218)"
+                        : word.front == "L1"
+                        ? "rgba(208, 231, 247, 0.76)"
+                        : "rgb(185, 204, 218)",
                     }}
                   >
                     <center>
-                    <h5 style={{ userSelect: "none" }}>{word.Q}</h5>
+                      <h5 style={{ userSelect: "none" }}>{word.Q}</h5>
                     </center>
                   </div>
                 </div>
@@ -173,6 +188,28 @@ export const Memory = () => {
           })}
         </Grid>
       </div>
+
+      {win && (
+        <center>
+          <br />
+          <br />
+          <Button
+            size="large"
+            variant="contained"
+            sx={{
+              paddingBottom: "10px",
+              textTransform: "none",
+              backgroundColor: "#b9ccda",
+              "&:hover": {
+                backgroundColor: "#8699a7",
+              },
+            }}
+            onClick={() => reset()}
+          >
+            Play again
+          </Button>
+        </center>
+      )}
 
       <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
         <SnackbarContent
@@ -186,6 +223,65 @@ export const Memory = () => {
           }
         />
       </Snackbar>
+
+      <Modal
+        open={win && closeModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        onClose={handleCloseModal}
+      >
+        <Box sx={style}>
+          <div
+            style={{
+              zIndex: 0,
+              padding: "0px",
+              margin: "0px",
+              marginLeft: "-0.2px",
+              marginTop: "-0.5px",
+              paddingTop: "3px",
+              width: "100.2%",
+              height: "55px",
+              borderRadius: "6px 6px 0 0",
+              backgroundColor: "#B9CCDA",
+            }}
+          >
+            <h1
+              style={{
+                padding: "0px",
+                margin: "0px",
+                textAlign: "left",
+                paddingLeft: "20px",
+                paddingBottom: "0px",
+              }}
+            >
+              Meal do naidheachd!{" "}
+              <span style={{ float: "right", marginRight: "5px", marginTop: "-8px" }}>
+                <CloseIcon onClick={() => setCloseModal(false)} />
+              </span>
+            </h1>
+          </div>
+          <center>
+            <div style={{ padding: "10px" }}>
+              <h3>You won! Would you like to play again?</h3>
+            </div>
+            <Button
+              size="large"
+              variant="contained"
+              sx={{
+                paddingBottom: "10px",
+                textTransform: "none",
+                backgroundColor: "#b9ccda",
+                "&:hover": {
+                  backgroundColor: "#8699a7",
+                },
+              }}
+              onClick={() => reset()}
+            >
+              Play again
+            </Button>
+          </center>
+        </Box>
+      </Modal>
     </div>
   );
 };

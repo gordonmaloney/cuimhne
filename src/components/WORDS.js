@@ -191,7 +191,7 @@ export const WORDS = [
 {l1: "dè", l2: "what", level: "Phrases 2"},
 {l1: "a-rithist", l2: "again", level: "Phrases 2"},
 {l1: "mòran taing", l2: "many thanks", level: "Phrases 2"},
-{l1: "s e do bheatha", l2: "you're welcome", level: "Phrases 2"},
+{l1: "'s e do bheatha", l2: "you're welcome", level: "Phrases 2"},
 {l1: "feumaidh mi falbh", l2: "I have to go", level: "Phrases 2"},
 {l1: "na gabh dragh", l2: "never mind", level: "Phrases 2"},
 {l1: "a' tuigsinn", l2: "Understanding", level: "Phrases 2"},
