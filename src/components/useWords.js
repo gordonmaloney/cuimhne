@@ -1,26 +1,12 @@
-import React from "react";
+import { useSelector } from "react-redux";
 import { WORDS } from "./WORDS";
 
+
+
 export const useWords = () => {
-  //select from levels
-  let levels = [
-    "Intro",
-    "Food and Drink",
-    "Phrases",
-    "Feelings",
-    "About Me",
-    "Clothing",
-    "Pets",
-    "Weather",
-    "Phrases 2",
-    "Rain etc.",
-    "Numbers",
-    "Family",
-    "Numbers 2",
-    "Food 2",
-    "Colors",
-    "Home",
-  ];
+
+  const levels = useSelector(state => state.levels)
+
 
   //make random array of 6 words from WORDS list
   let RandomArray = [];
@@ -40,7 +26,6 @@ export const useWords = () => {
     let newWord2 = { Q: word.l2, A: word.l1, front: "L2" };
     shuffledWords.push(newWord);
     shuffledWords.push(newWord2);
-    console.log(shuffledWords);
   });
 
   function shuffleArray(array) {
@@ -50,8 +35,7 @@ export const useWords = () => {
     }
   }
 
-  {
     shuffleArray(shuffledWords);
-  }
+
   return shuffledWords;
 };

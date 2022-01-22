@@ -1,61 +1,21 @@
-import React, { useState } from "react";
-import { WORDS } from "./WORDS";
+import React, { useState, useMemo } from "react";
 import Grid from "@mui/material/Grid";
 import Snackbar from "@mui/material/Snackbar";
 import { Button, SnackbarContent } from "@mui/material";
+import {useWords} from './useWords'
 
-//select from levels
-let levels = [
-    "Intro",
-    "Food and Drink",
-    "Phrases",
-    "Feelings",
-    "About Me",
-    "Clothing",
-    "Pets",
-    "Weather",
-    "Phrases 2",
-    "Rain etc.",
-    "Numbers",
-    "Family",
-    "Numbers 2",
-    "Food 2",
-    "Colors",
-    "Home"
-    ]
-
-//make random array of 6 words from WORDS list
-let RandomArray = [];
-
-for (let i = 0; RandomArray.length < 6; i++) {
-  let RanNum = Math.floor(Math.random() * WORDS.length);
-  !RandomArray.includes(WORDS[RanNum]) && levels.includes(WORDS[RanNum].level) &&
-    WORDS[RanNum].l1 !== WORDS[RanNum].l2 &&
-    RandomArray.push(WORDS[RanNum]);
-}
-
-let shuffledWords = [];
-
-RandomArray.map((word) => {
-  let newWord = { Q: word.l1, A: word.l2, front: "L1" };
-  let newWord2 = { Q: word.l2, A: word.l1, front: "L2" };
-  shuffledWords.push(newWord);
-  shuffledWords.push(newWord2);
-  console.log(shuffledWords)
-});
-
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-
-{
-  shuffleArray(shuffledWords);
-}
+import { useSelector } from "react-redux";
 
 export const Memory = () => {
+
+  const levels = useSelector(state => state.levels)
+  console.log("levels, ", levels)
+
+  //import array from useWords
+  const ImportedWords = useWords();
+  const ImportedArray = useMemo(() => ImportedWords, [ImportedWords.length, levels]);
+
+
   const [selectL1, setSelectL1] = useState("");
   const [selectL2, setSelectL2] = useState("");
 
@@ -72,8 +32,6 @@ export const Memory = () => {
 
   const handleCorrect = () => {
     setTimeout(function () {
-      console.log("test");
-
       message != "Ceart!" && setMessage("Ceart!");
       !open && setOpen(true);
     }, 10);
@@ -87,13 +45,9 @@ export const Memory = () => {
   };
 
   if (selectL1 && selectL2) {
-    console.log(selectL1, selectL2);
-
     clickable == true && setClickable(false);
 
-    let selectQ = shuffledWords.filter((word) => word.Q == selectL1)[0];
-
-    console.log("selectQ: ", selectQ);
+    let selectQ = ImportedArray.filter((word) => word.Q == selectL1)[0];
 
     if (selectQ && selectL2 == selectQ.A) {
       //handle correct
@@ -109,7 +63,7 @@ export const Memory = () => {
     }
 
     setTimeout(function () {
-      if (correct.length == shuffledWords.length) {
+      if (correct.length == ImportedArray.length) {
         //handle win
         setWin(true);
         console.log("You win!");
@@ -128,7 +82,6 @@ export const Memory = () => {
     !selectL1 ? setSelectL1(wordId) : setSelectL2(wordId);
 
     show.push(wordId);
-    console.log("show: ", show);
   };
 
   //snackbar
@@ -170,7 +123,7 @@ export const Memory = () => {
         style={{ pointerEvents: !clickable && "none" }}
       >
         <Grid container spacing={1}>
-          {shuffledWords.map((word) => {
+          {ImportedArray?.map((word) => {
             return (
               <Grid item xs={4} sm={3} md={2}>
                 <div
