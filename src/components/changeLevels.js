@@ -28,7 +28,7 @@ export const ChangeLevels = () => {
 
     dispatch(
       replaceLevels(
-        levels.slice(levels.length - value[1], levels.length - value[0] + 1)
+        levels.slice(levels.length - newValue[1], levels.length - newValue[0] + 1)
       )
     );
   };
@@ -58,7 +58,6 @@ export const ChangeLevels = () => {
           min={1}
           max={levels.length}
           marks={marks}
-          
           sx={{
             '& input[type="range"]': {
               WebkitAppearance: "slider-vertical",
