@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useSelector } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
+import Fade from '@mui/material/Fade';
 
 const style = {
   position: "absolute",
@@ -93,7 +94,7 @@ export const Memory = () => {
         setCloseModal(true);
         console.log("You win!");
       }
-    }, 50);
+    }, 800);
 
     setTimeout(function () {
       setSelectL1("");
@@ -192,7 +193,6 @@ export const Memory = () => {
       {win && (
         <center>
           <br />
-          <br />
           <Button
             size="large"
             variant="contained"
@@ -229,7 +229,12 @@ export const Memory = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         onClose={handleCloseModal}
+        closeAfterTransition
+        BackdropProps={{
+          timeout: 5000,
+        }}
       >
+        <Fade in={closeModal && win}>
         <Box sx={style}>
           <div
             style={{
@@ -240,25 +245,27 @@ export const Memory = () => {
               marginTop: "-0.5px",
               paddingTop: "3px",
               width: "100.2%",
-              height: "55px",
+              height: "45px",
               borderRadius: "6px 6px 0 0",
               backgroundColor: "#B9CCDA",
             }}
           >
-            <h1
+                        <div style={{float: "right", display: "block"}}>
+            <CloseIcon onClick={() => setCloseModal(false)} />
+            </div>
+            <h2
               style={{
+                display: "block",
                 padding: "0px",
                 margin: "0px",
                 textAlign: "left",
-                paddingLeft: "20px",
+                paddingLeft: "10px",
                 paddingBottom: "0px",
               }}
             >
-              Meal do naidheachd!{" "}
-              <span style={{ float: "right", marginRight: "5px", marginTop: "-8px" }}>
-                <CloseIcon onClick={() => setCloseModal(false)} />
-              </span>
-            </h1>
+              Meal do naidheachd!
+            </h2>
+
           </div>
           <center>
             <div style={{ padding: "10px" }}>
@@ -281,6 +288,7 @@ export const Memory = () => {
             </Button>
           </center>
         </Box>
+        </Fade>
       </Modal>
     </div>
   );

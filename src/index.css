@@ -27,7 +27,6 @@ td {
 .header {
   background-color: #b9ccda;
   height: 90px;
-  text-align: center;
   position: absolute;
   width: 100%;
   top: 0;
@@ -77,15 +76,17 @@ h5 {
     margin-right: -50px;
     margin-left: -50px;
   }
-  h1, .menufab, .header-howto {
+  h1,
+  .menufab,
+  .header-howto {
     transform: scale(0.7);
   }
-
 }
 
 .CardsContainer {
+  margin-left: -10px; 
   perspective: 8000px;
-  -webkit-perspective: 8000px,
+  -webkit-perspective: 8000px;
 }
 
 .card {
@@ -147,12 +148,17 @@ h5 {
 }
 
 .header-howto {
-  position: absolute;
-  right: 20px;
-  color: rgba(208, 231, 247, 0.76)
+  float: right;
+  top: 20px;
+  right: 30px;
+  display: block;
 }
 
 .modalBody {
   padding: 10px;
   text-align: center;
+}
+
+.css-19l5h75-MuiSlider-markLabel, .css-xxsb21-MuiSlider-markLabel {
+  user-select: none;
 }

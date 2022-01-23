@@ -9,6 +9,7 @@ import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import Box from "@mui/material/Box";
 import { ChangeLevels } from "./changeLevels";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import Fade from "@mui/material/Fade";
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
@@ -18,27 +19,29 @@ export const Header = () => {
   return (
     <>
       <div className="header">
-        <>
-          <Fab
-            sx={{
-              zIndex: 3,
-              backgroundColor: "white",
-              fontWeight: 600,
-              color: "#261420",
-            }}
-            className="menufab"
-            onClick={() => setShow(!show)}
-          >
-            {!show ? (
-              <MenuIcon fontSize="large" style={{ transform: "scale(1.3)" }} />
-            ) : (
-              <MenuOpenIcon
-                fontSize="large"
-                style={{ transform: "scale(1.3)" }}
-              />
-            )}
-          </Fab>
-        </>
+        <Fab
+          sx={{
+            zIndex: 3,
+            backgroundColor: "white",
+            fontWeight: 600,
+            color: "#261420",
+          }}
+          className="menufab"
+          onClick={() => setShow(!show)}
+        >
+          {!show ? (
+            <MenuIcon fontSize="large" style={{ transform: "scale(1.3)" }} />
+          ) : (
+            <MenuOpenIcon
+              fontSize="large"
+              style={{ transform: "scale(1.3)" }}
+            />
+          )}
+        </Fab>
+
+        <center>
+          <h1 style={{ width: "100%", display: "block", marginLeft: "-40px"}}>🤔 Cuimhne</h1>
+        </center>
 
         <FBModal
           prompt={
@@ -71,8 +74,8 @@ export const Header = () => {
               <br />
               <br />
               The game is intended to be a study aid for people using the Gaelic
-              Duolingo course, and the vocabulary is based on the first
-              checkpoint of that.
+              Duolingo course. You can use the menu in the top left corner to
+              choose the levels you want to study vocabulary from.
               <br />
               <br />
               If you would like to support this project and the development of
@@ -84,8 +87,6 @@ export const Header = () => {
             </div>
           }
         />
-
-        <h1>🤔 Cuimhne</h1>
 
         <Drawer
           style={{ zIndex: 2 }}

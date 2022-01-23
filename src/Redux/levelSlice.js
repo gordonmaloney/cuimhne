@@ -6,7 +6,7 @@ export const levelSlice = createSlice({
     "Intro",
     "Food and Drink",
     "Phrases",
-    "Feelings",
+   "Feelings",
     "About Me",
     "Clothing",
     "Pets",

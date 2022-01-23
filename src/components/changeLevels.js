@@ -9,25 +9,19 @@ import { LEVELS } from "../components/LEVELS";
 export const ChangeLevels = () => {
   const dispatch = useDispatch();
 
-  //const levels = useSelector((state) => state.levels);
   const levels = LEVELS();
 
-  const [newLevel, setNewLevel] = useState("Home");
 
-  const handleAdd = (level) => {
-    dispatch(addLevel(level));
-  };
 
-  const handleRemove = (level) => {
-    dispatch(removeLevel(level));
-  };
+  //calculate initial values from state
+  const stateLevels = useSelector((state) => state.levels);
+  const initialStart = levels.length-levels.indexOf(stateLevels[0])
+  const initialEnd = levels.length-levels.indexOf(stateLevels[stateLevels.length-1])
 
   const levelLength = levels.length;
 
-  function valuetext(value) {
-    return `${value}°C`;
-  }
-  const [value, setValue] = React.useState([1, levelLength]);
+
+  const [value, setValue] = React.useState([initialEnd, initialStart]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -60,11 +54,11 @@ export const ChangeLevels = () => {
           value={value}
           orientation="vertical"
           onChange={handleChange}
-          getAriaValueText={valuetext}
           disableSwap
           min={1}
           max={levels.length}
           marks={marks}
+          
           sx={{
             '& input[type="range"]': {
               WebkitAppearance: "slider-vertical",
