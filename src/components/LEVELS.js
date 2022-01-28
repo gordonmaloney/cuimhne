@@ -1,25 +1,46 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
 export const LEVELS = () => {
-    
-    const [levels, setLevels] = useState([
-        "Intro",
-        "Food and Drink",
-        "Phrases",
-        "Feelings",
-        "About Me",
-        "Clothing",
-        "Pets",
-        "Weather",
-        "Phrases 2",
-        "Rain etc.",
-        "Numbers",
-        "Family",
-        "Numbers 2",
-        "Food 2",
-        "Colors",
-        "Home",
-      ]);
+  const [levels, setLevels] = useState([
+    "Intro",
+    "Food and Drink",
+    "Phrases",
+    "Feelings",
+    "About Me",
+    "Clothing",
+    "Pets",
+    "Weather",
+    "Phrases 2",
+    "Rain etc.",
+    "Numbers",
+    "Family",
+    "Numbers 2",
+    "Food 2",
+    "Colors",
+    "Home",
+    "About Me 2",
+    "Phrases 3",
+    "Body",
+    "Animals",
+    "Names",
+    "Hobbies",
+    "Travel",
+    "Names 2",
+    "Feelings 2",
+    "Countries",
+    "Pets 2",
+    "Body 2",
+    "Days",
+    "Family 2",
+    "Sport",
+    "Food 3",
+    "Time",
+    "Weather 2",
+    "Home 2",
+    "Work",
+    "Sayings",
+    "Languages",
+  ]);
 
   return levels;
 };

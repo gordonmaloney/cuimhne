@@ -6,7 +6,7 @@ export const levelSlice = createSlice({
     "Intro",
     "Food and Drink",
     "Phrases",
-   "Feelings",
+    "Feelings",
     "About Me",
     "Clothing",
     "Pets",
@@ -19,6 +19,28 @@ export const levelSlice = createSlice({
     "Food 2",
     "Colors",
     "Home",
+    "About Me 2",
+    "Phrases 3",
+    "Body",
+    "Animals",
+    "Names",
+    "Hobbies",
+    "Travel",
+    "Names 2",
+    "Feelings 2",
+    "Countries",
+    "Pets 2",
+    "Body 2",
+    "Days",
+    "Family 2",
+    "Sport",
+    "Food 3",
+    "Time",
+    "Weather 2",
+    "Home 2",
+    "Work",
+    "Sayings",
+    "Languages",
   ],
 
   reducers: {
@@ -31,15 +53,15 @@ export const levelSlice = createSlice({
       if (state.length > 1) {
         return state.filter((level) => level !== action.payload);
       } else {
-        console.log ("You cannot remove every level")
-        return state
+        console.log("You cannot remove every level");
+        return state;
       }
     },
 
     replaceLevels: (state, action) => {
       state = action.payload;
-      return state
-    }
+      return state;
+    },
   },
 });
 

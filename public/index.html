@@ -7,8 +7,17 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Gaelic Memory"
+      content="A Gaelic memory game"
     />
+
+    <meta content='game' ng-if='og_meta.type' property='og:type'>
+    <meta content='https://cuimhne.netlify.app/' ng-if='og_meta.url' property='og:url'>
+    <meta content='Cuimhne - a Gaelic memory game' ng-if='og_meta.title' property='og:title'>
+    <meta content='Cuimhne - a Gaelic memory game' ng-if='og_meta.description' property='og:description'>
+
+    <meta property="og:image" content="https://cuimhne.netlify.app/og.png" />
+    
+    <meta content="966242223397117" property="fb:app_id" />
 
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
@@ -16,12 +25,13 @@
     <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%//favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%//favicon-16x16.png">
 
-    <title>Cuimhne</title>
+    <title>Cuimhne - a Gaelic memory game</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
+    <!-- React App -->
 
 <div style="display: none">
     <div id="sfcjke1m37mndmj4yncathbausn2byy14nk"></div><script type="text/javascript" src="https://counter2.stat.ovh/private/counter.js?c=jke1m37mndmj4yncathbausn2byy14nk&down=async" async></script>
